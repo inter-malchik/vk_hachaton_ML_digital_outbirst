@@ -11,6 +11,8 @@ for index, row in enumerate(df.itertuples()):
     if not is_correct_row(row):
         df.drop(index)
         count += 1
+    else:
+        ClientParser
 
 
 print(count)
