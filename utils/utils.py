@@ -23,7 +23,7 @@ def parse_date(date_str):
     return date
 
 
-class UserParser:
+class ClientParser:
 
     max_url_click = 0
     min_url_click = float('inf')
@@ -46,17 +46,17 @@ class UserParser:
         self.url_average = sum(self.urls_dict.values()) / len(self.urls_dict)
         self.title_average = sum(self.urls_dict.values()) / len(self.urls_dict)
 
-        UserParser.update_class_fields(self)
+        ClientParser.update_class_fields(self)
 
     @classmethod
     def update_class_fields(cls, instance):
 
-        cls.min_url_click = min(instance.urls_dict.values(), cls.min_url_click)
-        cls.max_url_click = max(instance.urls_dict.values(), cls.max_url_click)
+        cls.min_url_click = min(min(instance.urls_dict.values()), cls.min_url_click)
+        cls.max_url_click = max(max(instance.urls_dict.values()), cls.max_url_click)
         cls.url_click_counter += sum(instance.urls_dict.values())
 
-        cls.min_title_click = min(instance.titles_dict.values(), cls.min_title_click)
-        cls.max_title_click = max(instance.titles_dict.values(), cls.max_title_click)
+        cls.min_title_click = min(min(instance.titles_dict.values()), cls.min_title_click)
+        cls.max_title_click = max(max(instance.titles_dict.values()), cls.max_title_click)
         cls.title_click_counter += sum(instance.titles_dict.values())
 
     @staticmethod
