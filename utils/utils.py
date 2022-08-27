@@ -4,6 +4,7 @@ from typing import List
 import pymorphy2
 from transliterate import translit
 
+from ..reformate_data import *
 
 def is_correct_row(row):
     if row:
@@ -53,6 +54,8 @@ class ClientParser:
         titles = row['tokens']
         self.titles_dict = self.to_dict(titles)
         self.urls_dict = self.to_dict(urls)
+        self.ready_urls = waste_digits(self.urls_dict)
+        self.ready_titles = waste_digits(self.titles_dict)
 
         self.url_average = sum(self.urls_dict.values()) / len(self.urls_dict)
         self.title_average = sum(self.urls_dict.values()) / len(self.urls_dict)
