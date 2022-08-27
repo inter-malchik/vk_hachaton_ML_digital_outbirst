@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from .utils import *
+from utils import *
 
 df = pd.read_csv("lies.csv", delimiter='\t')
 

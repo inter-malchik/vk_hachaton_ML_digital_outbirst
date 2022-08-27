@@ -1,6 +1,9 @@
 from datetime import datetime, date
 from typing import List
 
+import pymorphy2
+from transliterate import translit
+
 
 def is_correct_row(row):
     if row:
@@ -21,6 +24,14 @@ def parse_date(date_str):
     except Exception:
         raise ValueError
     return date
+
+
+def check_word(word, view=False):
+    morph = pymorphy2.MorphAnalyzer(lang='ru')
+    result = morph.word_is_known(translit(word, 'ru'))
+    if view and not result:
+        print(word)
+    return result
 
 
 class ClientParser:
@@ -69,3 +80,4 @@ class ClientParser:
                 value = str_obj
                 dictionary[key] = int(value)
         return dictionary
+
