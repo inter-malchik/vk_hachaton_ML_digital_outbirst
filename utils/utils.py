@@ -26,13 +26,16 @@ def parse_date(date_str):
         raise ValueError
     return date
 
+morph = pymorphy2.MorphAnalyzer(lang='ru')
 
 def check_word(word, view=False):
-    morph = pymorphy2.MorphAnalyzer(lang='ru')
     result = morph.word_is_known(translit(word, 'ru'))
     if view and not result:
         print(word)
     return result
+
+def get_normal_form(word):
+    return morph.parse(translit(word, 'ru'))[0].normal_form
 
 
 class ClientParser:
